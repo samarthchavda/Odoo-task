@@ -3,6 +3,7 @@
     'description': "sale extend",
     'depends': ['sale'],
     'data': [
+        'data/discount_data.xml',
         'views/sale_order_views.xml',
         'views/add_discount_wizard_views.xml',
     ],

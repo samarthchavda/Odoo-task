@@ -14,11 +14,12 @@ class AddDiscountWizard(models.TransientModel):
             if line.product_id:
                 line.discount = self.discount_number
 
-        discount_product = self.env['product.product'].search([('name', '=','discount')])
+        discount_product = self.env.ref('sale_extend.discount_product_data').product_variant_id
+        # discount_product = self.env['product.product'].search([('name', '=','discount')])
 
-        if not discount_product:
-            self.env['sale.order.line'].create({
+        self.env['sale.order.line'].create({
                 'order_id': order.id,
                 'product_id': discount_product.id,
                 'name': discount_product.name,
+                'price_unit': -self.discount_number,
             })
